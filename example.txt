@@ -1,0 +1,28 @@
+
+import "fmt"
+
+#define int uint64
+
+func main() (int)
+{
+    int n = 3
+    cout << n.add(3) << endl // 6
+    cin >> n // 100を入力する
+    cout << if (0 < n < 101){ "Yes" } else { "No" } << endl // Yes
+    int (a,b) = twoThree()
+    cout << a << " " <<  b << endl; // 2 3
+    lib.printHundred() // 100
+    return 0
+}
+
+// メソッド(返り値なし)
+func [add: int] add (int a)
+{
+    num += a
+}
+
+// 関数
+func twoThree() [int, int]
+{
+    return 2, 3
+}

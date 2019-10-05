@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include<token.hpp>
+//#include<token.hpp>
 
 // 字句解析器を構成しているもの
 typedef struct _lexer {
@@ -12,24 +12,31 @@ typedef struct _lexer {
 // 次の文字を読み込んでpositionとreadPositionを更新している
 void readChar( Lexer *l )
 {
-    if ( l.readPosition >= l.input.size() )
+    if ( l->readPosition >= l->input.size() )
     {
-        l.ch = 0;
+        l->ch = NULL;
     }
     else
     {
-        l.ch = l.input[l.readPosition];
+        l->ch = l->input[l->readPosition];
     }
-    l.position = l.readPosition;
-    l.readPosition++;
+    l->position = l->readPosition;
+    l->readPosition += 1;
 }
 
 // 字句解析器を生成する関数
-Lexer New(string input)
+Lexer New(std::string input)
 {
     Lexer *l;
-    l.readChar()
-    return &l;
+    l -> input = input;
+    readChar(&l);
+    return l;
+}
+
+int main()
+{
+    Lexer *l = New("santa");
+    std::cout << l->input << std::endl;
 }
 
 

@@ -2,10 +2,10 @@
 
 typedef std::string TokenType;
 
-typedef struct _token {
+struct Token {
     TokenType Type;
     std::string Literal;
-}Token;
+};
 
 // 識別子(変数や関数の名前) + リテラル(リテラルはキーワードでもある)
 const std::string IDENT = "IDENT";

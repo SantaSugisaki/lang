@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-//#include<token.hpp>
+#include<token.hpp>
 
 // 字句解析器を構成しているもの
 struct Lexer {
@@ -33,8 +33,49 @@ Lexer New(std::string input)
     return *l;
 }
 
+void skipWhiteSpace( Lexer *l )
+{
+    while( l->ch == ' ' || l->ch == '\t' || l->ch == '\n' || l->ch == '\r')
+    {
+        readChar(l);
+    }
+}
+
+Token newToken(TokenType tokenType, char ch)
+{
+    return Token{ Type: tokenType, Literal: (string)ch };
+}
+
+Token NextToken( Lexer *l )
+{
+    Token tok;
+    skipWhiteSpace(l);
+    switch(l->ch)
+    {
+        case '=':
+            if ( peekChar(l) == '=')
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = Token { Type: EQ, Literal: literal};
+            }
+            else
+            {
+                tok = newToken(ASSIGN, l->ch);
+            }
+        break;
+        case '+':
+            tok = newToken(PLU):
+        break;
+
+    }
+}
+
+/*
 int main()
 {
     Lexer l = New("santa");
     std::cout << l.input << std::endl;
 }
+*/

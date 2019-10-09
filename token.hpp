@@ -16,18 +16,24 @@ const std::string CHAR = "CHAR";
 // 演算子
 const std::string ASSIGN = "=";
 const std::string PLUS ="+";
+const std::string PLUSEQ = "+=";
 const std::string MINUS = "-";
+const std::string MINUSEQ = "-=";
 const std::string BANG = "!";
 const std::string ASTERISK = "*";
+const std::string ASTERISKEQ = "*=";
 const std::string SLASH = "/";
+const std::string SLASHEQ = "/=";
 
-// 比較演算子
+// 比較演算子, &&,||など
 const std::string LT = "<";
 const std::string LTE = "<=";
 const std::string GT = ">";
 const std::string GTE = ">=";
 const std::string EQ = "==";
 const std::string NOT_EQ = "!=";
+const std::string AND = "&&";
+const std::string OR = "||";
 
 // デリミタ(各項目を区切る目印として使う文字)
 const std::string COMMA = ",";

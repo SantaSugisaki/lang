@@ -41,15 +41,28 @@ void skipWhiteSpace( Lexer *l )
     }
 }
 
+char peekChar(Lexer * l)
+{
+    if(l->readPosition >= l->input.size())
+    {
+        return '\0';
+    }
+    else
+    {
+        return l->input[l->readPosition];
+    }
+}
+
 Token newToken(TokenType tokenType, char ch)
 {
-    return Token{ Type: tokenType, Literal: (string)ch };
+    return { tokenType, (string)ch };
 }
 
 Token NextToken( Lexer *l )
 {
     Token tok;
     skipWhiteSpace(l);
+    // caseとbreakは必ず対にする事
     switch(l->ch)
     {
         case '=':
@@ -58,7 +71,7 @@ Token NextToken( Lexer *l )
                 char ch = l->ch;
                 readChar(l);
                 std::string literal = (std::string)ch + (std::string)l->ch;
-                tok = Token { Type: EQ, Literal: literal};
+                tok = { EQ, literal };
             }
             else
             {
@@ -66,9 +79,104 @@ Token NextToken( Lexer *l )
             }
         break;
         case '+':
-            tok = newToken(PLU):
+            if( peekChar(l) == '=')
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { PLUSEQ, literal };
+            }
+            else
+            {
+                tok = newToken(PLUS, l->ch);
+            }
         break;
-
+        case '-':
+            if ( peekChar(l) == '=' )
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { MINUSEQ, literal };
+            }
+            else
+            {
+                tok = newToken(MINUS, l->ch);
+            }
+        break;
+        case '!':
+            if ( peekChar(l) == '=' )
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { NOT_EQ, literal};
+            }
+            else
+            {
+                tok = newToken( BANG, l->ch );
+            }
+        break;
+        case '/':
+            if ( peekChar(l) == '=')
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { SLASHEQ, literal };
+            }
+            else
+            {
+                tok = newToken( SLASH, l->ch );
+            }
+        break;
+        case '*':
+            if (peekChar(l) == '=' )
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { ASTERISKEQ, literal };
+            }
+            else
+            {
+                tok = newToken( ASTERISK, l->ch );
+            }
+        break;
+        case '<':
+            if ( peekChar(l) == '=' )
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { LTE, literal };
+            }
+            else
+            {
+                tok = newToken( LT, l->ch );
+            }
+        break;
+        case '>':
+            if ( peekChar(l) == '=' )
+            {
+                char ch = l->ch;
+                readChar(l);
+                std::string literal = (std::string)ch + (std::string)l->ch;
+                tok = { GTE, literal };
+            }
+            else
+            {
+                tok = newToken( GT, l->ch );
+            }
+        break;
+        case ';':
+            tok = newToken( SEMICOLON, l->ch );
+        break;
+        case ',':
+            tok = newToken( COMMA, l->ch );
+        break;
+        case '(':
+            tok = newToken( LPAREN)
     }
 }
 
